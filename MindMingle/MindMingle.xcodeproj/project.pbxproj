@@ -12,6 +12,9 @@
 		041D95AF2B24A75300216C51 /* Adventure-320bit(chosic.com).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 041D95A52B24A75200216C51 /* Adventure-320bit(chosic.com).mp3 */; };
 		041D95CC2B24F42A00216C51 /* NavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D95CB2B24F42A00216C51 /* NavController.swift */; };
 		043E298A2B25B0A100C42368 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E29892B25B0A100C42368 /* SoundManager.swift */; };
+		043E29922B25CD4600C42368 /* CardGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E29912B25CD4600C42368 /* CardGameController.swift */; };
+		043E29972B25CE3800C42368 /* MatchCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E29962B25CE3800C42368 /* MatchCards.swift */; };
+		043E299C2B25CEB600C42368 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E299B2B25CEB600C42368 /* Cards.swift */; };
 		044A8B3C2B1F05C700591A09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A8B3B2B1F05C700591A09 /* AppDelegate.swift */; };
 		044A8B3E2B1F05C700591A09 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A8B3D2B1F05C700591A09 /* SceneDelegate.swift */; };
 		044A8B402B1F05C700591A09 /* FrontPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A8B3F2B1F05C700591A09 /* FrontPageViewController.swift */; };
@@ -54,6 +57,9 @@
 		041D95A52B24A75200216C51 /* Adventure-320bit(chosic.com).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Adventure-320bit(chosic.com).mp3"; sourceTree = "<group>"; };
 		041D95CB2B24F42A00216C51 /* NavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavController.swift; sourceTree = "<group>"; };
 		043E29892B25B0A100C42368 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		043E29912B25CD4600C42368 /* CardGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameController.swift; sourceTree = "<group>"; };
+		043E29962B25CE3800C42368 /* MatchCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCards.swift; sourceTree = "<group>"; };
+		043E299B2B25CEB600C42368 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		044A8B382B1F05C700591A09 /* MindMingle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindMingle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		044A8B3B2B1F05C700591A09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		044A8B3D2B1F05C700591A09 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +154,9 @@
 				04EAF9032B206F8400846E90 /* OptionViewController.swift */,
 				041D95CB2B24F42A00216C51 /* NavController.swift */,
 				043E29892B25B0A100C42368 /* SoundManager.swift */,
+				043E29912B25CD4600C42368 /* CardGameController.swift */,
+				043E29962B25CE3800C42368 /* MatchCards.swift */,
+				043E299B2B25CEB600C42368 /* Cards.swift */,
 			);
 			path = MindMingle;
 			sourceTree = "<group>";
@@ -304,12 +313,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EAF8E52B20659100846E90 /* QEasyInstructionsViewController.swift in Sources */,
+				043E29922B25CD4600C42368 /* CardGameController.swift in Sources */,
 				04FB9B522B1F205F00BB04A3 /* SelectViewController.swift in Sources */,
+				043E29972B25CE3800C42368 /* MatchCards.swift in Sources */,
 				04EAF8F32B20695500846E90 /* SettingsViewController.swift in Sources */,
 				044A8B402B1F05C700591A09 /* FrontPageViewController.swift in Sources */,
 				04EAF8DD2B20553200846E90 /* CHardInstructionsViewController.swift in Sources */,
 				043E298A2B25B0A100C42368 /* SoundManager.swift in Sources */,
 				04EAF9042B206F8400846E90 /* OptionViewController.swift in Sources */,
+				043E299C2B25CEB600C42368 /* Cards.swift in Sources */,
 				04EAF8CF2B2032BD00846E90 /* CEasyInstructionsViewController.swift in Sources */,
 				044A8B3C2B1F05C700591A09 /* AppDelegate.swift in Sources */,
 				04EAF8EA2B2065AA00846E90 /* QHardInstructionsViewController.swift in Sources */,

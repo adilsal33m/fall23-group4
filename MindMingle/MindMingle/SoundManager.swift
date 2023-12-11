@@ -18,7 +18,16 @@ class SoundManager {
             }
         }
     }
-    var isSoundEnabled: Bool = true
+    var isSoundEnabled: Bool = true {
+            didSet {
+                if isSoundEnabled {
+                    // Code to enable sound effects (if needed)
+                } else {
+                    // Code to disable sound effects
+                    soundEffectPlayer?.stop()
+                }
+            }
+        }
 
     private var backgroundMusic: AVAudioPlayer?
     private var soundEffectPlayer: AVAudioPlayer?

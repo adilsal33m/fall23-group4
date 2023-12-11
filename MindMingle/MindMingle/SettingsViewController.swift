@@ -15,6 +15,7 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         if let soundURL = Bundle.main.url(forResource: "click_effect-86995", withExtension: "mp3") {
                     do {
@@ -167,10 +168,10 @@ class SettingsViewController: UIViewController {
             playButtonSound()
         }
 
-        @objc func soundToggleChanged() {
-            SoundManager.shared.isSoundEnabled = soundToggleButton.isOn
-            SoundManager.shared.saveSettings()
-            // No need to play sound here since we're toggling sound settings
+    @IBAction func soundToggleChanged(_ sender: Any) {
+            if let toggle = sender as? UISwitch { // or UIButton, depending on your UI element
+                SoundManager.shared.isSoundEnabled = toggle.isOn // Update the sound setting
+            }
         }
 
         @objc func backButtonTapped() {
