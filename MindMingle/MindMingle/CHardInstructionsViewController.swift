@@ -65,12 +65,12 @@ class CHardInstructionsViewController: UIViewController {
         container.addSubview(titleLabel)
 
         // Buttons (Side by Side)
-        let button1 = createOutlineButton(title: "8 x 8")
-        let button2 = createOutlineButton(title: "10 x 10")
-        container.addSubview(button1)
-        container.addSubview(button2)
-        button1.addTarget(self, action: #selector(button1Tapped), for: .touchUpInside)
-        button2.addTarget(self, action: #selector(button2Tapped), for: .touchUpInside)
+        let button5 = createOutlineButton(title: "6 x 6")
+        let button6 = createOutlineButton(title: "8 x 8")
+        container.addSubview(button5)
+        container.addSubview(button6)
+        button5.addTarget(self, action: #selector(button5Tapped), for: .touchUpInside)
+        button6.addTarget(self, action: #selector(button6Tapped), for: .touchUpInside)
 
         // Line Divider
         let lineDivider = UIView()
@@ -128,15 +128,15 @@ class CHardInstructionsViewController: UIViewController {
             titleLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 20),
 
-            button1.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            button1.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            button1.widthAnchor.constraint(equalToConstant: 130),
+            button5.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
+            button5.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            button5.widthAnchor.constraint(equalToConstant: 130),
 
-            button2.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -20),
-            button2.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            button2.widthAnchor.constraint(equalToConstant: 130),
+            button6.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -20),
+            button6.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            button6.widthAnchor.constraint(equalToConstant: 130),
 
-            lineDivider.topAnchor.constraint(equalTo: button1.bottomAnchor, constant: 20),
+            lineDivider.topAnchor.constraint(equalTo: button5.bottomAnchor, constant: 20),
             lineDivider.heightAnchor.constraint(equalToConstant: 1),
             lineDivider.leadingAnchor.constraint(equalTo: container.leadingAnchor),
             lineDivider.trailingAnchor.constraint(equalTo: container.trailingAnchor),
@@ -237,19 +237,31 @@ class CHardInstructionsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func button1Tapped() {
+    @objc func button5Tapped() {
         // Handle button 1 tap
         buttonTapSound?.play()
-        print("Button 1 tapped")
-        // Add your actions for button 1 here
+        print("Button 5 tapped")
+        let cardController = CardGameController()
+        cardController.configureGrid(buttonNumber: 5)  // Configure for 6by6 grid
+        navigationController?.pushViewController(cardController, animated: true)
     }
 
-    @objc func button2Tapped() {
+    @objc func button6Tapped() {
         // Handle button 2 tap
         buttonTapSound?.play()
-        print("Button 2 tapped")
-        // Add your actions for button 2 here
+        print("Button 6 tapped")
+        let cardController = CardGameController()
+        cardController.configureGrid(buttonNumber:6)  // Configure for 8by8 grid
+        navigationController?.pushViewController(cardController, animated: true)
     }
+    
+    @IBAction func gridButtonPressed(_ sender: UIButton) {
+            let cardGameController = CardGameController() // Or get reference from storyboard/segue
+            cardGameController.configureGrid(buttonNumber: sender.tag)
+            
+            // Navigate to CardGameController, adjust based on your navigation logic
+            self.present(cardGameController, animated: true, completion: nil)
+        }
 
 
 }

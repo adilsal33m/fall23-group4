@@ -65,7 +65,7 @@ class CEasyInstructionsViewController: UIViewController {
 
         // Buttons (Side by Side)
         let button1 = createOutlineButton(title: "4 x 4")
-        let button2 = createOutlineButton(title: "6 x 6")
+        let button2 = createOutlineButton(title: "5 x 5")
         container.addSubview(button1)
         container.addSubview(button2)
         button1.addTarget(self, action: #selector(button1Tapped), for: .touchUpInside)
@@ -235,19 +235,30 @@ class CEasyInstructionsViewController: UIViewController {
     }
     
     @objc func button1Tapped() {
-        // Handle button 1 tap
-        buttonTapSound?.play()
-        print("Button 1 tapped")
-        // Add your actions for button 1 here
-    }
+            // Handle button 1 tap
+            buttonTapSound?.play()
+            print("Button 1 tapped")
+            let cardController = CardGameController()
+            cardController.configureGrid(buttonNumber: 1)  // Configure for 4by4 grid
+            navigationController?.pushViewController(cardController, animated: true)
+        }
 
-    @objc func button2Tapped() {
-        // Handle button 2 tap
-        buttonTapSound?.play()
-        print("Button 2 tapped")
-        // Add your actions for button 2 here
-    }
+        @objc func button2Tapped() {
+            // Handle button 2 tap
+            buttonTapSound?.play()
+            print("Button 2 tapped")
+            let cardController = CardGameController()
+            cardController.configureGrid(buttonNumber: 2)  // Configure for 5by5 grid
+            navigationController?.pushViewController(cardController, animated: true)
+        }
 
+    @IBAction func gridButtonPressed(_ sender: UIButton) {
+            let cardGameController = CardGameController() // Or get reference from storyboard/segue
+            cardGameController.configureGrid(buttonNumber: sender.tag)
+            
+            // Navigate to CardGameController, adjust based on your navigation logic
+            self.present(cardGameController, animated: true, completion: nil)
+        }
 
 }
 
