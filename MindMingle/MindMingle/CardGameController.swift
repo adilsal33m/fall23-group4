@@ -10,10 +10,12 @@
 //
 //  Created by MindMingle on 13/11/2023.
 //
-
+import AVFoundation
 import UIKit
 
 class CardGameController: UIViewController {
+    
+    var buttonTapSound: AVAudioPlayer?
     
     
     var numberOfRows = 7
@@ -26,7 +28,7 @@ class CardGameController: UIViewController {
         private lazy var game = MatchCard(numberOfPairsOfCards: self.numberOfPairOfCards)
         
         private var cardEmoji = [Card: String]()
-        private var emojiChoices = "🐶🐱🐭🐹🦁🐔🙊🦇🦊"
+        private var emojiChoices = "😂😘😑🥳😭👻❤✌🍕🌼🌟✈️💸🗿💩"
         
         let flipCountLabel = UILabel()
         let scoreLabel = UILabel()
@@ -46,22 +48,34 @@ class CardGameController: UIViewController {
             createCardUI(numberOfRows: self.numberOfRows, cardsPerRow: self.cardsPerRow)
             updateViewFromModel()
             startTimer()
+            if let soundURL = Bundle.main.url(forResource: "click_effect-86995", withExtension: "mp3") {
+                        do {
+                            try buttonTapSound = AVAudioPlayer(contentsOf: soundURL)
+                            buttonTapSound?.prepareToPlay()
+                        } catch {
+                            print("Error loading sound: \(error.localizedDescription)")
+                        }
+                    } else {
+                        print("Button tap sound file not found")
+                    }
         }
+    
+    
 
         func configureGrid(buttonNumber: Int) {
             switch buttonNumber {
             case 1:
                 numberOfRows = 4
-                cardsPerRow = 4
+                cardsPerRow = 3
             case 2:
-                numberOfRows = 4
-                cardsPerRow = 6
+                numberOfRows = 5
+                cardsPerRow = 4
             case 5:
                 numberOfRows = 6
-                cardsPerRow = 6
+                cardsPerRow = 5
             case 6:
                 numberOfRows = 8
-                cardsPerRow = 8
+                cardsPerRow = 7
             default:
                 numberOfRows = 4 // Default case
                 cardsPerRow = 4
@@ -80,19 +94,37 @@ class CardGameController: UIViewController {
 
     
     func createCardUI(numberOfRows: Int, cardsPerRow: Int) {
-        // Create a stack view for the top section
+        
         let topStackView = UIStackView()
         topStackView.axis = .horizontal
         topStackView.alignment = .fill
         topStackView.distribution = .fillProportionally
         topStackView.spacing = 10
         
+        let iconButton = UIButton(type: .custom)
+            let iconImage = UIImage(named: "Settings") // Replace with your image name
+            iconButton.setImage(iconImage, for: .normal)
+            iconButton.tintColor = .white
+            view.addSubview(iconButton)
+        
+        iconButton.addTarget(self, action: #selector(iconButtonTapped), for: .touchUpInside)
+        
+        
+        iconButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                iconButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+                iconButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                iconButton.widthAnchor.constraint(equalToConstant: 40),
+                iconButton.heightAnchor.constraint(equalToConstant: 40)
+            ])
+        
+        
         let backgroundImage = UIImageView(image: UIImage(named: "Background"))
         
         backgroundImage.frame = view.bounds
         backgroundImage.contentMode = .scaleAspectFill // Adjust content mode to fit
             
-        if let customFont = UIFont(name: "HappyMonkey-Regular", size: 16) {
+        if let customFont = UIFont(name: "HappyMonkey-Regular", size: 19) {
             // Use the custom font for the title label
             scoreLabel.font = customFont
             flipCountLabel.font = customFont
@@ -172,26 +204,27 @@ class CardGameController: UIViewController {
         // Add the parent stack view to the main view
         view.addSubview(parentStackView)
         
-        let restartButton = UIButton()
-        restartButton.setTitle("Restart", for: .normal)
-        restartButton.backgroundColor = .blue
-        restartButton.addTarget(self, action: #selector(restartButtonTapped(_:)), for: .touchUpInside)
         
-        view.addSubview(restartButton)
-        
-        // Add constraints to define the position and size of the parent stack view
+        NSLayoutConstraint.activate([
+            iconButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            iconButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            iconButton.widthAnchor.constraint(equalToConstant: 40),
+            iconButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+
+        // Constraint for the parentStackView
         parentStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            parentStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            parentStackView.topAnchor.constraint(equalTo: iconButton.bottomAnchor, constant: 10), // Changed to position below the icon button
             parentStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             parentStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            parentStackView.bottomAnchor.constraint(equalTo: restartButton.topAnchor, constant: -20)
+            parentStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -90)
         ])
-        
-        topStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            topStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
-        ])
+                    
+                    topStackView.translatesAutoresizingMaskIntoConstraints = false
+                    NSLayoutConstraint.activate([
+                        topStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05)
+                    ])
         
         
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -202,26 +235,19 @@ class CardGameController: UIViewController {
             bottomStackView.bottomAnchor.constraint(equalTo: parentStackView.bottomAnchor)
         ])
         
-        restartButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            restartButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
-            restartButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            restartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            restartButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
-        ])
-        
         // Update the game model for new grid size
             game = MatchCard(numberOfPairsOfCards: (numberOfRows * cardsPerRow) / 2)
 
             // Refresh the UI
             updateViewFromModel()
+        
+        
     }
     
     
     @objc func cardButtonTapped(_ sender: UIButton) {
         
         FlippedCardCount += 1
-
         
         if FlippedCardCount != 3 {
             secondLastCardButtonTapped = lastCardButtonTapped
@@ -287,7 +313,7 @@ class CardGameController: UIViewController {
                         
                         if card.isFaceUp {
                                         button.setTitle(getEmoji(for: card), for: .normal)
-                                        button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
+                                        button.titleLabel?.font = UIFont.systemFont(ofSize: 32)
                                         button.backgroundColor = .white
                                     } else {
                                         button.setTitle("", for: .normal)
@@ -330,10 +356,6 @@ class CardGameController: UIViewController {
         UIView.transition(with: button, duration: 0.4, options: [.transitionFlipFromLeft], animations: nil, completion: nil)
     }
     
-    
-    @objc func restartButtonTapped(_ sender: UIButton) {
-        
-    }
 
     
     private func startTimer() {
@@ -356,6 +378,17 @@ class CardGameController: UIViewController {
     private func stopTimer() {
         timer?.invalidate()
         timer = nil
+    }
+    
+    @objc func iconButtonTapped() {
+        buttonTapSound?.play()
+        print("Icon button tapped")
+        
+        // Instantiate the SettingsViewController
+        let optionViewController = OptionViewController()
+        
+        // Push the SettingsViewController onto the navigation stack
+        self.navigationController?.pushViewController(optionViewController, animated: true)
     }
 
 }
