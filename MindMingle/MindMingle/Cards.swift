@@ -13,6 +13,7 @@ struct Card: Hashable {
     private var identifier: Int
     private static var identifierFactory = 0
     
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)
     }

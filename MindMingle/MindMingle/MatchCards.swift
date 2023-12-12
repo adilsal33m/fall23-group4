@@ -39,6 +39,7 @@ class MatchCard {
         return true
     }
     
+    
     // Method to start the timer
     func startTimer() {
         startTime = Date()

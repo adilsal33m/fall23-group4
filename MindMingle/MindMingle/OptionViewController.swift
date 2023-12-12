@@ -53,7 +53,7 @@ class OptionViewController: UIViewController {
 
         // Resume, Settings, Quit Buttons
         let resumeButton = createButton(title: "Resume")
-        let settingsButton = createButton(title: "Settings")
+        let restartButton = createButton(title: "Restart")
         let quitButton = createButton(title: "Quit")
 
         container.addSubview(resumeButton)
@@ -62,7 +62,7 @@ class OptionViewController: UIViewController {
         let divider1 = createDivider()
         container.addSubview(divider1)
 
-        container.addSubview(settingsButton)
+        container.addSubview(restartButton)
 
         // Divider 2
         let divider2 = createDivider()
@@ -71,7 +71,7 @@ class OptionViewController: UIViewController {
         container.addSubview(quitButton)
 
         resumeButton.addTarget(self, action: #selector(resumeButtonTapped), for: .touchUpInside)
-        settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
+        restartButton.addTarget(self, action: #selector(restartButtonTapped), for: .touchUpInside)
         quitButton.addTarget(self, action: #selector(quitButtonTapped), for: .touchUpInside)
 
         // Layout Constraints
@@ -94,10 +94,10 @@ class OptionViewController: UIViewController {
             divider1.leadingAnchor.constraint(equalTo: container.leadingAnchor),
             divider1.trailingAnchor.constraint(equalTo: container.trailingAnchor),
 
-            settingsButton.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            settingsButton.topAnchor.constraint(equalTo: divider1.bottomAnchor, constant: 10),
+            restartButton.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            restartButton.topAnchor.constraint(equalTo: divider1.bottomAnchor, constant: 10),
 
-            divider2.topAnchor.constraint(equalTo: settingsButton.bottomAnchor, constant: 10),
+            divider2.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 10),
             divider2.heightAnchor.constraint(equalToConstant: 1),
             divider2.leadingAnchor.constraint(equalTo: container.leadingAnchor),
             divider2.trailingAnchor.constraint(equalTo: container.trailingAnchor),
@@ -155,9 +155,9 @@ class OptionViewController: UIViewController {
         // Add actions for the Resume button
     }
 
-    @objc func settingsButtonTapped() {
+    @objc func restartButtonTapped() {
         buttonTapSound?.play()
-        print("Settings button tapped")
+        print("restart button tapped")
         // Add actions for the Settings button
     }
 
