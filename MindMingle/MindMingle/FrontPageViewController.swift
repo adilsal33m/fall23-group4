@@ -159,7 +159,7 @@ class FrontPageViewController: UIViewController {
             buttonTapSound?.play()
             print("Settings button tapped")
             
-            if let videoPath = Bundle.main.path(forResource: "Tutorial", ofType: "mov") {
+            if let videoPath = Bundle.main.path(forResource: "Tutorial 2", ofType: "mov") {
                 let videoURL = URL(fileURLWithPath: videoPath)
                 let player = AVPlayer(url: videoURL)
                 let playerViewController = AVPlayerViewController()
