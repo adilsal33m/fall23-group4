@@ -15,6 +15,7 @@
 		043E29922B25CD4600C42368 /* CardGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E29912B25CD4600C42368 /* CardGameController.swift */; };
 		043E29972B25CE3800C42368 /* MatchCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E29962B25CE3800C42368 /* MatchCards.swift */; };
 		043E299C2B25CEB600C42368 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E299B2B25CEB600C42368 /* Cards.swift */; };
+		044786A52B2A9E0700A0AA91 /* Tutorial.mov in Resources */ = {isa = PBXBuildFile; fileRef = 044786A42B2A9E0600A0AA91 /* Tutorial.mov */; };
 		044A8B3C2B1F05C700591A09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A8B3B2B1F05C700591A09 /* AppDelegate.swift */; };
 		044A8B3E2B1F05C700591A09 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A8B3D2B1F05C700591A09 /* SceneDelegate.swift */; };
 		044A8B402B1F05C700591A09 /* FrontPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A8B3F2B1F05C700591A09 /* FrontPageViewController.swift */; };
@@ -23,6 +24,12 @@
 		044A8B482B1F05C900591A09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 044A8B462B1F05C900591A09 /* LaunchScreen.storyboard */; };
 		044A8B532B1F05CA00591A09 /* MindMingleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A8B522B1F05CA00591A09 /* MindMingleTests.swift */; };
 		044A8B5E2B1F05CA00591A09 /* MindMingleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A8B5D2B1F05CA00591A09 /* MindMingleUITests.swift */; };
+		046EC40D2B290A0D00861C09 /* HighScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EC40C2B290A0D00861C09 /* HighScore.swift */; };
+		046EC4122B290A3400861C09 /* HighScoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046EC4112B290A3400861C09 /* HighScoreController.swift */; };
+		04CF1A372B2A6AE10063E607 /* yay-6120.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04CF1A362B2A6AE10063E607 /* yay-6120.mp3 */; };
+		04CF1A3C2B2A6B2E0063E607 /* achievement-sound-1-95506.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04CF1A3B2B2A6B2E0063E607 /* achievement-sound-1-95506.mp3 */; };
+		04CF1A422B2A788E0063E607 /* negative_beeps-6008.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04CF1A402B2A788E0063E607 /* negative_beeps-6008.mp3 */; };
+		04CF1A432B2A788E0063E607 /* error-2-126514.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04CF1A412B2A788E0063E607 /* error-2-126514.mp3 */; };
 		04EAF8CF2B2032BD00846E90 /* CEasyInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF8CE2B2032BD00846E90 /* CEasyInstructionsViewController.swift */; };
 		04EAF8DD2B20553200846E90 /* CHardInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF8DC2B20553200846E90 /* CHardInstructionsViewController.swift */; };
 		04EAF8E52B20659100846E90 /* QEasyInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF8E42B20659100846E90 /* QEasyInstructionsViewController.swift */; };
@@ -60,6 +67,7 @@
 		043E29912B25CD4600C42368 /* CardGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameController.swift; sourceTree = "<group>"; };
 		043E29962B25CE3800C42368 /* MatchCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCards.swift; sourceTree = "<group>"; };
 		043E299B2B25CEB600C42368 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
+		044786A42B2A9E0600A0AA91 /* Tutorial.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Tutorial.mov; path = ../../../../Tutorial.mov; sourceTree = "<group>"; };
 		044A8B382B1F05C700591A09 /* MindMingle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindMingle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		044A8B3B2B1F05C700591A09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		044A8B3D2B1F05C700591A09 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +82,12 @@
 		044A8B592B1F05CA00591A09 /* MindMingleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MindMingleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		044A8B5D2B1F05CA00591A09 /* MindMingleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindMingleUITests.swift; sourceTree = "<group>"; };
 		044A8B5F2B1F05CA00591A09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		046EC40C2B290A0D00861C09 /* HighScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScore.swift; sourceTree = "<group>"; };
+		046EC4112B290A3400861C09 /* HighScoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreController.swift; sourceTree = "<group>"; };
+		04CF1A362B2A6AE10063E607 /* yay-6120.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "yay-6120.mp3"; path = "../../../../../Downloads/MindMingle/Sound/yay-6120.mp3"; sourceTree = "<group>"; };
+		04CF1A3B2B2A6B2E0063E607 /* achievement-sound-1-95506.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "achievement-sound-1-95506.mp3"; path = "../../../../../Downloads/MindMingle 2/Sound/achievement-sound-1-95506.mp3"; sourceTree = "<group>"; };
+		04CF1A402B2A788E0063E607 /* negative_beeps-6008.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "negative_beeps-6008.mp3"; path = "../../../../../Downloads/MindMingle 2/Sound/negative_beeps-6008.mp3"; sourceTree = "<group>"; };
+		04CF1A412B2A788E0063E607 /* error-2-126514.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "error-2-126514.mp3"; path = "../../../../../Downloads/MindMingle 2/Sound/error-2-126514.mp3"; sourceTree = "<group>"; };
 		04EAF8CE2B2032BD00846E90 /* CEasyInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEasyInstructionsViewController.swift; sourceTree = "<group>"; };
 		04EAF8DC2B20553200846E90 /* CHardInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CHardInstructionsViewController.swift; sourceTree = "<group>"; };
 		04EAF8E42B20659100846E90 /* QEasyInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QEasyInstructionsViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +147,11 @@
 		044A8B3A2B1F05C700591A09 /* MindMingle */ = {
 			isa = PBXGroup;
 			children = (
+				044786A42B2A9E0600A0AA91 /* Tutorial.mov */,
+				04CF1A412B2A788E0063E607 /* error-2-126514.mp3 */,
+				04CF1A402B2A788E0063E607 /* negative_beeps-6008.mp3 */,
+				04CF1A3B2B2A6B2E0063E607 /* achievement-sound-1-95506.mp3 */,
+				04CF1A362B2A6AE10063E607 /* yay-6120.mp3 */,
 				041D95A52B24A75200216C51 /* Adventure-320bit(chosic.com).mp3 */,
 				041D95A02B24A75200216C51 /* click_effect-86995.mp3 */,
 				041D95A42B24A75200216C51 /* HappyMonkey-Regular.ttf */,
@@ -157,6 +176,8 @@
 				043E29912B25CD4600C42368 /* CardGameController.swift */,
 				043E29962B25CE3800C42368 /* MatchCards.swift */,
 				043E299B2B25CEB600C42368 /* Cards.swift */,
+				046EC40C2B290A0D00861C09 /* HighScore.swift */,
+				046EC4112B290A3400861C09 /* HighScoreController.swift */,
 			);
 			path = MindMingle;
 			sourceTree = "<group>";
@@ -283,11 +304,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				041D95AA2B24A75300216C51 /* click_effect-86995.mp3 in Resources */,
+				04CF1A432B2A788E0063E607 /* error-2-126514.mp3 in Resources */,
 				041D95AE2B24A75300216C51 /* HappyMonkey-Regular.ttf in Resources */,
 				044A8B482B1F05C900591A09 /* LaunchScreen.storyboard in Resources */,
 				044A8B452B1F05C900591A09 /* Assets.xcassets in Resources */,
+				044786A52B2A9E0700A0AA91 /* Tutorial.mov in Resources */,
+				04CF1A372B2A6AE10063E607 /* yay-6120.mp3 in Resources */,
 				041D95AF2B24A75300216C51 /* Adventure-320bit(chosic.com).mp3 in Resources */,
+				04CF1A3C2B2A6B2E0063E607 /* achievement-sound-1-95506.mp3 in Resources */,
 				044A8B432B1F05C700591A09 /* Main.storyboard in Resources */,
+				04CF1A422B2A788E0063E607 /* negative_beeps-6008.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,8 +340,10 @@
 			files = (
 				04EAF8E52B20659100846E90 /* QEasyInstructionsViewController.swift in Sources */,
 				043E29922B25CD4600C42368 /* CardGameController.swift in Sources */,
+				046EC4122B290A3400861C09 /* HighScoreController.swift in Sources */,
 				04FB9B522B1F205F00BB04A3 /* SelectViewController.swift in Sources */,
 				043E29972B25CE3800C42368 /* MatchCards.swift in Sources */,
+				046EC40D2B290A0D00861C09 /* HighScore.swift in Sources */,
 				04EAF8F32B20695500846E90 /* SettingsViewController.swift in Sources */,
 				044A8B402B1F05C700591A09 /* FrontPageViewController.swift in Sources */,
 				04EAF8DD2B20553200846E90 /* CHardInstructionsViewController.swift in Sources */,

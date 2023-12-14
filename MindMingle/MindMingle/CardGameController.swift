@@ -16,7 +16,12 @@ import UIKit
 class CardGameController: UIViewController {
     
     var buttonTapSound: AVAudioPlayer?
+    var playerName: String?
+    var matchSound: AVAudioPlayer?
+    var gameEndSound: AVAudioPlayer?
+    var errSound: AVAudioPlayer?
     
+
     
     var numberOfRows = 7
         var cardsPerRow = 4
@@ -33,6 +38,7 @@ class CardGameController: UIViewController {
         let flipCountLabel = UILabel()
         let scoreLabel = UILabel()
         let timeLabel = UILabel()
+    private var cardsFlipped = false
         
         private var cardButtons = [UIButton]()
         
@@ -48,6 +54,7 @@ class CardGameController: UIViewController {
             createCardUI(numberOfRows: self.numberOfRows, cardsPerRow: self.cardsPerRow)
             updateViewFromModel()
             startTimer()
+
             if let soundURL = Bundle.main.url(forResource: "click_effect-86995", withExtension: "mp3") {
                         do {
                             try buttonTapSound = AVAudioPlayer(contentsOf: soundURL)
@@ -58,24 +65,59 @@ class CardGameController: UIViewController {
                     } else {
                         print("Button tap sound file not found")
                     }
-        }
-    
-    
+            
+            // Load and prepare the match sound
+                        if let matchSoundURL = Bundle.main.url(forResource: "achievement-sound-1-95506", withExtension: "mp3") {
+                            do {
+                                try matchSound = AVAudioPlayer(contentsOf: matchSoundURL)
+                                matchSound?.prepareToPlay()
+                            } catch {
+                                print("Error loading match sound: \(error.localizedDescription)")
+                            }
+                        } else {
+                            print("Match sound file not found")
+                        }
+
+                        // Load and prepare the game end sound
+                        if let gameEndSoundURL = Bundle.main.url(forResource: "yay-6120", withExtension: "mp3") {
+                            do {
+                                try gameEndSound = AVAudioPlayer(contentsOf: gameEndSoundURL)
+                                gameEndSound?.prepareToPlay()
+                            } catch {
+                                print("Error loading game end sound: \(error.localizedDescription)")
+                            }
+                        } else {
+                            print("Game end sound file not found")
+                        }
+            
+            // Load and prepare the match sound
+                        if let errSoundURL = Bundle.main.url(forResource: "error-2-126514", withExtension: "mp3") {
+                            do {
+                                try errSound = AVAudioPlayer(contentsOf: errSoundURL)
+                                errSound?.prepareToPlay()
+                            } catch {
+                                print("Error loading match sound: \(error.localizedDescription)")
+                            }
+                        } else {
+                            print("Match sound file not found")
+                        }
+
+}
 
         func configureGrid(buttonNumber: Int) {
             switch buttonNumber {
             case 1:
-                numberOfRows = 4
-                cardsPerRow = 3
-            case 2:
-                numberOfRows = 5
+                numberOfRows = 3
                 cardsPerRow = 4
-            case 5:
-                numberOfRows = 6
+            case 2:
+                numberOfRows = 4
                 cardsPerRow = 5
+            case 5:
+                numberOfRows = 5
+                cardsPerRow = 6
             case 6:
-                numberOfRows = 8
-                cardsPerRow = 7
+                numberOfRows = 7
+                cardsPerRow = 8
             default:
                 numberOfRows = 4 // Default case
                 cardsPerRow = 4
@@ -102,7 +144,7 @@ class CardGameController: UIViewController {
         topStackView.spacing = 10
         
         let iconButton = UIButton(type: .custom)
-            let iconImage = UIImage(named: "Settings") // Replace with your image name
+            let iconImage = UIImage(named: "Settings")
             iconButton.setImage(iconImage, for: .normal)
             iconButton.tintColor = .white
             view.addSubview(iconButton)
@@ -125,46 +167,39 @@ class CardGameController: UIViewController {
         backgroundImage.contentMode = .scaleAspectFill // Adjust content mode to fit
             
         if let customFont = UIFont(name: "HappyMonkey-Regular", size: 19) {
-            // Use the custom font for the title label
             scoreLabel.font = customFont
             flipCountLabel.font = customFont
             timeLabel.font = customFont
         } else {
-            // Fallback to a system font if the custom font is not available
+
             scoreLabel.font = UIFont.systemFont(ofSize: 24)
         }
         
-        // Add the image view to the view as the background
         view.addSubview(backgroundImage)
         view.sendSubviewToBack(backgroundImage)
 
-        // Create the score label and flip count label
         scoreLabel.text = "Score: 0"
         scoreLabel.textAlignment = .left
         flipCountLabel.text = "Flips: 0"
         flipCountLabel.textAlignment = .right
         
-        // Set time label
         timeLabel.text = "Time: 0s"
         timeLabel.textAlignment = .center
         
-        // Add the labels to the top stack view
         topStackView.addArrangedSubview(scoreLabel)
         topStackView.addArrangedSubview(timeLabel)
         topStackView.addArrangedSubview(flipCountLabel)
         
-        // Clear existing card buttons
         cardButtons.forEach { $0.removeFromSuperview() }
         cardButtons.removeAll()
 
-        // Create a stack view for the bottom section
         let bottomStackView = UIStackView()
         bottomStackView.axis = .vertical
         bottomStackView.alignment = .fill
         bottomStackView.distribution = .fillEqually
         bottomStackView.spacing = 10
         
-        // Create the grid of card buttons
+        // Create the grid of card buttons as in the previous example
         for _ in 0..<numberOfRows {
             let rowStackView = UIStackView()
             rowStackView.axis = .horizontal
@@ -174,14 +209,15 @@ class CardGameController: UIViewController {
             
             for _ in 0..<cardsPerRow {
                 let cardButton = UIButton()
-                cardButton.backgroundColor = .black // Default background color
-                cardButton.layer.cornerRadius = 4
-                cardButton.layer.masksToBounds = true
+                cardButton.setTitle("", for: .normal)
+                cardButton.backgroundColor = .black
                 
-                // Add the card button to the card buttons array
+
+                
+                // add the card button to card buttons array
                 cardButtons.append(cardButton)
                 
-                // Add the target-action pair
+                // add the target-action pair
                 cardButton.addTarget(self, action: #selector(cardButtonTapped(_:)), for: .touchUpInside)
                 
                 rowStackView.addArrangedSubview(cardButton)
@@ -190,18 +226,17 @@ class CardGameController: UIViewController {
             bottomStackView.addArrangedSubview(rowStackView)
         }
 
-        // Create a parent stack view to arrange the top and bottom sections vertically
+
         let parentStackView = UIStackView()
         parentStackView.axis = .vertical
         parentStackView.alignment = .fill
         parentStackView.distribution = .fill
         parentStackView.spacing = 20
 
-        // Add the top and bottom stack views to the parent stack view
+
         parentStackView.addArrangedSubview(topStackView)
         parentStackView.addArrangedSubview(bottomStackView)
 
-        // Add the parent stack view to the main view
         view.addSubview(parentStackView)
         
         
@@ -212,7 +247,6 @@ class CardGameController: UIViewController {
             iconButton.heightAnchor.constraint(equalToConstant: 40)
         ])
 
-        // Constraint for the parentStackView
         parentStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             parentStackView.topAnchor.constraint(equalTo: iconButton.bottomAnchor, constant: 10), // Changed to position below the icon button
@@ -235,10 +269,7 @@ class CardGameController: UIViewController {
             bottomStackView.bottomAnchor.constraint(equalTo: parentStackView.bottomAnchor)
         ])
         
-        // Update the game model for new grid size
             game = MatchCard(numberOfPairsOfCards: (numberOfRows * cardsPerRow) / 2)
-
-            // Refresh the UI
             updateViewFromModel()
         
         
@@ -247,11 +278,13 @@ class CardGameController: UIViewController {
     
     @objc func cardButtonTapped(_ sender: UIButton) {
         
+        
         FlippedCardCount += 1
         
         if FlippedCardCount != 3 {
             secondLastCardButtonTapped = lastCardButtonTapped
             lastCardButtonTapped = sender
+            
         }
         if lastCardButtonTapped == nil {
             lastCardButtonTapped = sender
@@ -295,20 +328,26 @@ class CardGameController: UIViewController {
                 let button = cardButtons[index]
                 let card = game.cards[index]
             if card.isMatched {
-                        // If the card is matched, remove the button from the view and disable it
-                        UIView.animate(withDuration: 0.3, animations: {
-                            button.alpha = 0  // Fade out animation
-                        }, completion: { _ in
-                            button.isHidden = true
-                            button.isEnabled = false
-                        })
+                UIView.transition(with: button, duration: 0.5, options: [.transitionFlipFromLeft], animations: {
+                    // Flip animation
+                    button.alpha = 0.5
+                    self.matchSound?.play()
+                }, completion: { _ in
+                    UIView.animate(withDuration: 0.2, animations: {
+                        // Fade out animation after flip
+                        button.alpha = 0
+                    }, completion: { _ in
+                        button.isHidden = true
+                        button.isEnabled = false
+                    })
+
+                })
                     } else {
-                        // Reset the button's properties if the card is not matched
                         button.isHidden = false
                         button.alpha = 1
                         button.isEnabled = true
                         
-            button.layer.cornerRadius = 3 // Adjust the radius as needed
+            button.layer.cornerRadius = 3
             button.layer.masksToBounds = true
                         
                         if card.isFaceUp {
@@ -323,22 +362,19 @@ class CardGameController: UIViewController {
         }
         
         if game.allCardsMatched {
+            gameEndSound?.play()
             stopTimer()
-            
-            //let highScoreManager = HighScoreManager()
-            //let topFiveHighScores = highScoreManager.getTopHighScore()
-            //let lastHighScore = topFiveHighScores.last
-            //let newScore = HighScore(time: <#T##TimeInterval#>, score: game.score, flips: game.flipCount)
-            
-            performSegue(withIdentifier: "showHighScore", sender: self)
+                navigateToHighScores()
+            }
+        
         }
-    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showHighScore" {
-            
-        }
+    private func navigateToHighScores() {
+        let highScoreVC = HighScoreController()
+        navigationController?.pushViewController(highScoreVC, animated: true)
     }
+
+
     
     private func getEmoji(for card: Card) -> String {
         if cardEmoji[card] == nil, emojiChoices.count > 0 {
@@ -353,14 +389,20 @@ class CardGameController: UIViewController {
     
     
     func flipCard(_ card: Card, button: UIButton) {
-        UIView.transition(with: button, duration: 0.4, options: [.transitionFlipFromLeft], animations: nil, completion: nil)
+        UIView.transition(with: button, duration: 0.5, options: [.transitionFlipFromTop], animations: nil, completion: nil)
     }
     
 
     
     private func startTimer() {
-        startTime = Date.timeIntervalSinceReferenceDate
+        timer?.invalidate()
+
+        if startTime == nil {
+            startTime = Date.timeIntervalSinceReferenceDate - game.elapsedTime
+        }
+        
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    
     }
     
     @objc private func updateTimer() {
@@ -369,26 +411,67 @@ class CardGameController: UIViewController {
         }
         
         let currentTime = Date.timeIntervalSinceReferenceDate
-        let elapsedTime = currentTime - startTime
+        let totalTime = currentTime - startTime + game.elapsedTime
         
         // Update the time label in your UI
-        timeLabel.text = "Time: \(Int(elapsedTime))s"
+        timeLabel.text = "Time: \(Int(totalTime))s"
     }
+
     
     private func stopTimer() {
+        if let startTime = startTime {
+            let currentTime = Date.timeIntervalSinceReferenceDate
+            game.elapsedTime += currentTime - startTime
+        }
         timer?.invalidate()
         timer = nil
+        startTime = nil
     }
+
+
     
     @objc func iconButtonTapped() {
         buttonTapSound?.play()
-        print("Icon button tapped")
         
-        // Instantiate the SettingsViewController
         let optionViewController = OptionViewController()
+        optionViewController.delegate = self
         
-        // Push the SettingsViewController onto the navigation stack
-        self.navigationController?.pushViewController(optionViewController, animated: true)
+        stopTimer()
+        
+        navigationController?.pushViewController(optionViewController, animated: true)
+    }
+    
+    func gameDidEnd() {
+        guard let playerName = playerName else {
+            print("Player name not set")
+            return
+        }
+
+        let finalScore = game.score
+        let newHighScore = HighScore(name: playerName, score: finalScore)
+        saveHighScore(newHighScore)
+
+        navigateToHighScores()  // This function should present HighScoreController
+    }
+
+
+    func saveHighScore(_ highScore: HighScore) {
+        var highScores = [HighScore]()
+
+        // Load existing high scores
+        if let savedScores = UserDefaults.standard.object(forKey: "HighScores") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedScores = try? decoder.decode([HighScore].self, from: savedScores) {
+                highScores = loadedScores
+            }
+        }
+
+        // Add new high score and save
+        highScores.append(highScore)
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(highScores) {
+            UserDefaults.standard.set(encoded, forKey: "HighScores")
+        }
     }
 
 }
@@ -405,4 +488,37 @@ extension Int {
         }
     }
 }
+
+
+
+extension CardGameController: OptionViewControllerDelegate {
+    func resumeGame() {
+        navigationController?.popViewController(animated: true)
+        startTimer()
+    }
+
+    func restartGame() {
+        navigationController?.popViewController(animated: true)
+        game.resetGame()
+            game.elapsedTime = 0
+            updateViewFromModel()
+            startTimer()
+    }
+
+    func quitGame() {
+        let frontpageviewController = FrontPageViewController()
+
+        navigationController?.pushViewController(frontpageviewController, animated: true)
+    }
+    
+    
+}
+
+extension CardGameController: NameViewControllerDelegate {
+    func playerNameEntered(name: String) {
+        playerName = name
+    }
+}
+
+
 

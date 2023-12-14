@@ -64,8 +64,8 @@ class CEasyInstructionsViewController: UIViewController {
         container.addSubview(titleLabel)
 
         // Buttons (Side by Side)
-        let button1 = createOutlineButton(title: "4 x 4")
-        let button2 = createOutlineButton(title: "5 x 5")
+        let button1 = createOutlineButton(title: "3 x 4")
+        let button2 = createOutlineButton(title: "4 x 5")
         container.addSubview(button1)
         container.addSubview(button2)
         button1.addTarget(self, action: #selector(button1Tapped), for: .touchUpInside)

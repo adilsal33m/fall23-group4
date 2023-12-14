@@ -8,6 +8,10 @@
 import UIKit
 import AVFoundation
 
+protocol NameViewControllerDelegate: AnyObject {
+    func playerNameEntered(name: String)
+}
+
 class NameViewController: UIViewController {
 
     let nameTextField: UITextField = {
@@ -22,6 +26,7 @@ class NameViewController: UIViewController {
             return textField
         }()
     
+    weak var delegate: NameViewControllerDelegate?
     
     var buttonTapSound: AVAudioPlayer?
 
@@ -126,19 +131,19 @@ class NameViewController: UIViewController {
 
     @objc func submitButtonTapped() {
         buttonTapSound?.play()
-        // Access the name entered in the text field
-        if let name = nameTextField.text, !name.isEmpty {
-            print("Name submitted: \(name)")
+        if let playerName = nameTextField.text, !playerName.isEmpty {
+                    delegate?.playerNameEntered(name: playerName)
+                    dismiss(animated: true, completion: nil)
+                }
+                
 
             // Create an instance of SelectViewController
             let levelViewController = LevelViewController() // Replace with your actual initialization code
 
             // Push the SelectViewController onto the navigation stack
             navigationController?.pushViewController(levelViewController, animated: true)
-        } else {
-            print("Please enter a valid name.")
         }
-    }
+    
 
     @objc func backButtonTapped() {
         buttonTapSound?.play()
