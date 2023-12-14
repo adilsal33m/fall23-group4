@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 class CHardInstructionsViewController: UIViewController {
-
+    var gridDetect: String? = ""
     var buttonTapSound: AVAudioPlayer?
 
     override func viewDidLoad() {
@@ -223,11 +223,31 @@ class CHardInstructionsViewController: UIViewController {
     }
 
     
-    @objc func startButtonTapped() {
-        // Placeholder for Start button tap
+    @objc func startButtonTapped()
+    {
         buttonTapSound?.play()
         print("Start button tapped")
-        // Add any actions or transitions you want for the Start button
+        
+        if let grid = gridDetect
+        {
+            let cardController = CardGameController()
+            if grid == "5 x 6"
+            {
+                cardController.configureGrid(buttonNumber: 5)// Configure for 6by6 grid
+                gridDetect = ""
+                navigationController?.pushViewController(cardController, animated: true)
+            }
+            else if grid == "7 x 8"
+            {
+                cardController.configureGrid(buttonNumber: 6)  // Configure for 6by6 grid
+                gridDetect = ""
+                navigationController?.pushViewController(cardController, animated: true)
+            }
+            else
+            {
+                print("Grid is not selected")
+            }
+        }
     }
 
     @objc func backButtonTapped() {
@@ -237,22 +257,20 @@ class CHardInstructionsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func button5Tapped() {
-        // Handle button 1 tap
+    @objc func button5Tapped()
+    {
+        // Handle button 5 tap
         buttonTapSound?.play()
         print("Button 5 tapped")
-        let cardController = CardGameController()
-        cardController.configureGrid(buttonNumber: 5)  // Configure for 6by6 grid
-        navigationController?.pushViewController(cardController, animated: true)
+        gridDetect = "5 x 6"
     }
 
-    @objc func button6Tapped() {
-        // Handle button 2 tap
+    @objc func button6Tapped()
+    {
+        // Handle button 6 tap
         buttonTapSound?.play()
         print("Button 6 tapped")
-        let cardController = CardGameController()
-        cardController.configureGrid(buttonNumber:6)  // Configure for 8by8 grid
-        navigationController?.pushViewController(cardController, animated: true)
+        gridDetect = "7 x 8"
     }
     
     @IBAction func gridButtonPressed(_ sender: UIButton) {

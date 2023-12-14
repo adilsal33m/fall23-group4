@@ -13,8 +13,8 @@
 import AVFoundation
 import UIKit
 
-class CardGameController: UIViewController {
-    
+class CardGameController: UIViewController
+{
     var buttonTapSound: AVAudioPlayer?
     var playerName: String?
     var matchSound: AVAudioPlayer?
@@ -24,9 +24,10 @@ class CardGameController: UIViewController {
 
     
     var numberOfRows = 7
-        var cardsPerRow = 4
+    var cardsPerRow = 4
         
-        var numberOfPairOfCards: Int {
+        var numberOfPairOfCards: Int
+        {
             return (numberOfRows * cardsPerRow) / 2
         }
         
@@ -38,7 +39,7 @@ class CardGameController: UIViewController {
         let flipCountLabel = UILabel()
         let scoreLabel = UILabel()
         let timeLabel = UILabel()
-    private var cardsFlipped = false
+        private var cardsFlipped = false
         
         private var cardButtons = [UIButton]()
         
@@ -49,62 +50,87 @@ class CardGameController: UIViewController {
         var startTime: TimeInterval?
         var timer: Timer?
 
-        override func viewDidLoad() {
+        override func viewDidLoad()
+        {
             super.viewDidLoad()
             createCardUI(numberOfRows: self.numberOfRows, cardsPerRow: self.cardsPerRow)
             updateViewFromModel()
             startTimer()
 
-            if let soundURL = Bundle.main.url(forResource: "click_effect-86995", withExtension: "mp3") {
-                        do {
-                            try buttonTapSound = AVAudioPlayer(contentsOf: soundURL)
-                            buttonTapSound?.prepareToPlay()
-                        } catch {
-                            print("Error loading sound: \(error.localizedDescription)")
-                        }
-                    } else {
-                        print("Button tap sound file not found")
-                    }
+            if let soundURL = Bundle.main.url(forResource: "click_effect-86995", withExtension: "mp3")
+            {
+                do
+                {
+                    try buttonTapSound = AVAudioPlayer(contentsOf: soundURL)
+                        buttonTapSound?.prepareToPlay()
+                }
+                catch
+                {
+                    print("Error loading sound: \(error.localizedDescription)")
+                }
+            }
+            else
+            {
+                print("Button tap sound file not found")
+            }
             
             // Load and prepare the match sound
-                        if let matchSoundURL = Bundle.main.url(forResource: "achievement-sound-1-95506", withExtension: "mp3") {
-                            do {
-                                try matchSound = AVAudioPlayer(contentsOf: matchSoundURL)
-                                matchSound?.prepareToPlay()
-                            } catch {
-                                print("Error loading match sound: \(error.localizedDescription)")
-                            }
-                        } else {
-                            print("Match sound file not found")
-                        }
+            if let matchSoundURL = Bundle.main.url(forResource: "achievement-sound-1-95506", withExtension: "mp3")
+            {
+                do
+                {
+                    try matchSound = AVAudioPlayer(contentsOf: matchSoundURL)
+                    matchSound?.prepareToPlay()
+                }
+                catch
+                {
+                    print("Error loading match sound: \(error.localizedDescription)")
+                }
+            }
+            else
+            {
+                print("Match sound file not found")
+            }
 
-                        // Load and prepare the game end sound
-                        if let gameEndSoundURL = Bundle.main.url(forResource: "yay-6120", withExtension: "mp3") {
-                            do {
-                                try gameEndSound = AVAudioPlayer(contentsOf: gameEndSoundURL)
-                                gameEndSound?.prepareToPlay()
-                            } catch {
-                                print("Error loading game end sound: \(error.localizedDescription)")
-                            }
-                        } else {
-                            print("Game end sound file not found")
-                        }
+            // Load and prepare the game end sound
+            if let gameEndSoundURL = Bundle.main.url(forResource: "yay-6120", withExtension: "mp3")
+            {
+                do
+                {
+                    try gameEndSound = AVAudioPlayer(contentsOf: gameEndSoundURL)
+                        gameEndSound?.prepareToPlay()
+                }
+                catch
+                {
+                    print("Error loading game end sound: \(error.localizedDescription)")
+                }
+            }
+            else
+            {
+                print("Game end sound file not found")
+            }
             
-            // Load and prepare the match sound
-                        if let errSoundURL = Bundle.main.url(forResource: "error-2-126514", withExtension: "mp3") {
-                            do {
-                                try errSound = AVAudioPlayer(contentsOf: errSoundURL)
-                                errSound?.prepareToPlay()
-                            } catch {
-                                print("Error loading match sound: \(error.localizedDescription)")
-                            }
-                        } else {
-                            print("Match sound file not found")
-                        }
+            // Load and prepare the error sound
+            if let errSoundURL = Bundle.main.url(forResource: "error-2-126514", withExtension: "mp3")
+            {
+                do
+                {
+                    try errSound = AVAudioPlayer(contentsOf: errSoundURL)
+                        errSound?.prepareToPlay()
+                }
+                catch
+                {
+                    print("Error loading match sound: \(error.localizedDescription)")
+                }
+            }
+            else
+            {
+                print("Match sound file not found")
+            }
 
 }
-
-        func configureGrid(buttonNumber: Int) {
+    func configureGrid(buttonNumber: Int)
+    {
             switch buttonNumber {
             case 1:
                 numberOfRows = 3
@@ -135,8 +161,8 @@ class CardGameController: UIViewController {
         }
 
     
-    func createCardUI(numberOfRows: Int, cardsPerRow: Int) {
-        
+    func createCardUI(numberOfRows: Int, cardsPerRow: Int)
+    {
         let topStackView = UIStackView()
         topStackView.axis = .horizontal
         topStackView.alignment = .fill
@@ -276,25 +302,27 @@ class CardGameController: UIViewController {
     }
     
     
-    @objc func cardButtonTapped(_ sender: UIButton) {
-        
-        
+    @objc func cardButtonTapped(_ sender: UIButton)
+    {
         FlippedCardCount += 1
         
-        if FlippedCardCount != 3 {
+        if FlippedCardCount != 3
+        {
             secondLastCardButtonTapped = lastCardButtonTapped
             lastCardButtonTapped = sender
-            
         }
-        if lastCardButtonTapped == nil {
+        if lastCardButtonTapped == nil
+        {
             lastCardButtonTapped = sender
             secondLastCardButtonTapped = sender
         }
         
         
         if FlippedCardCount == 3 {
-            if lastCardButtonTapped != secondLastCardButtonTapped {
-                if lastCardButtonTapped.title(for: .normal) != secondLastCardButtonTapped.title(for: .normal) {
+            if lastCardButtonTapped != secondLastCardButtonTapped
+            {
+                if lastCardButtonTapped.title(for: .normal) != secondLastCardButtonTapped.title(for: .normal)
+                {
                     UIView.transition(with: lastCardButtonTapped, duration: 0.4, options: [.transitionFlipFromLeft], animations: nil, completion: nil)
                     UIView.transition(with: secondLastCardButtonTapped, duration: 0.4, options: [.transitionFlipFromLeft], animations: nil, completion: nil)
                 }
@@ -327,7 +355,8 @@ class CardGameController: UIViewController {
 
                 let button = cardButtons[index]
                 let card = game.cards[index]
-            if card.isMatched {
+            if card.isMatched
+            {
                 UIView.transition(with: button, duration: 0.5, options: [.transitionFlipFromLeft], animations: {
                     // Flip animation
                     button.alpha = 0.5
@@ -342,23 +371,28 @@ class CardGameController: UIViewController {
                     })
 
                 })
-                    } else {
-                        button.isHidden = false
-                        button.alpha = 1
-                        button.isEnabled = true
+                    }
+            else
+            {
+                button.isHidden = false
+                button.alpha = 1
+                button.isEnabled = true
                         
-            button.layer.cornerRadius = 3
-            button.layer.masksToBounds = true
+                button.layer.cornerRadius = 3
+                button.layer.masksToBounds = true
                         
-                        if card.isFaceUp {
-                                        button.setTitle(getEmoji(for: card), for: .normal)
-                                        button.titleLabel?.font = UIFont.systemFont(ofSize: 32)
-                                        button.backgroundColor = .white
-                                    } else {
-                                        button.setTitle("", for: .normal)
-                                        button.backgroundColor = .systemGreen
-                                    }
-                                }
+                if card.isFaceUp
+                {
+                    button.setTitle(getEmoji(for: card), for: .normal)
+                    button.titleLabel?.font = UIFont.systemFont(ofSize: 32)
+                    button.backgroundColor = .white
+                }
+                else
+                {
+                    button.setTitle("", for: .normal)
+                    button.backgroundColor = .systemGreen
+                }
+            }
         }
         
         if game.allCardsMatched {

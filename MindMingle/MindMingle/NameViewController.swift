@@ -129,20 +129,23 @@ class NameViewController: UIViewController {
         return UIImage()
     }
 
-    @objc func submitButtonTapped() {
+    @objc func submitButtonTapped()
+    {
         buttonTapSound?.play()
-        if let playerName = nameTextField.text, !playerName.isEmpty {
-                    delegate?.playerNameEntered(name: playerName)
-                    dismiss(animated: true, completion: nil)
-                }
+        if let playerName = nameTextField.text
+        {
+            if !playerName.isEmpty
+            {
+                print(nameTextField.text!)
+                print(playerName.isEmpty)
+                delegate?.playerNameEntered(name: playerName)
+                dismiss(animated: true, completion: nil)
                 
-
-            // Create an instance of SelectViewController
-            let levelViewController = LevelViewController() // Replace with your actual initialization code
-
-            // Push the SelectViewController onto the navigation stack
-            navigationController?.pushViewController(levelViewController, animated: true)
+                let levelViewController = LevelViewController()
+                navigationController?.pushViewController(levelViewController, animated: true)
+            }
         }
+    }
     
 
     @objc func backButtonTapped() {

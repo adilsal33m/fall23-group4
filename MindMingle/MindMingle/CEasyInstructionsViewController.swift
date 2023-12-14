@@ -10,6 +10,7 @@ import AVFoundation
 
 class CEasyInstructionsViewController: UIViewController {
 
+    var gridDetect: String? = ""
     var buttonTapSound: AVAudioPlayer?
 
     override func viewDidLoad() {
@@ -224,7 +225,27 @@ class CEasyInstructionsViewController: UIViewController {
         // Placeholder for Start button tap
         buttonTapSound?.play()
         print("Start button tapped")
-        // Add any actions or transitions you want for the Start button
+        
+        if let grid = gridDetect
+        {
+            let cardController = CardGameController()
+            if grid == "3 x 4"
+            {
+                cardController.configureGrid(buttonNumber: 1)// Configure for 3by4 grid
+                gridDetect = ""
+                navigationController?.pushViewController(cardController, animated: true)
+            }
+            else if grid == "4 x 5"
+            {
+                cardController.configureGrid(buttonNumber: 2)  // Configure for 4by5 grid
+                gridDetect = ""
+                navigationController?.pushViewController(cardController, animated: true)
+            }
+            else
+            {
+                print("Grid is not selected")
+            }
+        }
     }
 
     @objc func backButtonTapped() {
@@ -238,18 +259,14 @@ class CEasyInstructionsViewController: UIViewController {
             // Handle button 1 tap
             buttonTapSound?.play()
             print("Button 1 tapped")
-            let cardController = CardGameController()
-            cardController.configureGrid(buttonNumber: 1)  // Configure for 4by4 grid
-            navigationController?.pushViewController(cardController, animated: true)
+            gridDetect = "3 x 4"
         }
 
         @objc func button2Tapped() {
             // Handle button 2 tap
             buttonTapSound?.play()
             print("Button 2 tapped")
-            let cardController = CardGameController()
-            cardController.configureGrid(buttonNumber: 2)  // Configure for 5by5 grid
-            navigationController?.pushViewController(cardController, animated: true)
+            gridDetect = "4 x 5"
         }
 
     @IBAction func gridButtonPressed(_ sender: UIButton) {
