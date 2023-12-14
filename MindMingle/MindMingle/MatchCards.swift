@@ -13,6 +13,8 @@ class MatchCard {
     
     private(set) var flipCount = 0
     
+    var elapsedTime: TimeInterval = 0
+
     private(set) var score = 0
     
     private(set) var discoveredCardsIndicies = [Int]()
@@ -109,7 +111,21 @@ class MatchCard {
         
     }
     
-    
+    func resetGame() {
+            // Reset the flip count and score
+            flipCount = 0
+            score = 0
+            discoveredCardsIndicies.removeAll()
+
+            // Reset all cards
+            for index in cards.indices {
+                cards[index].isMatched = false
+                cards[index].isFaceUp = false
+            }
+
+            // Shuffle the cards for a new game
+            cards.shuffle()
+        }
     
 }
 

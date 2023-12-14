@@ -8,7 +8,14 @@
 import UIKit
 import AVFoundation
 
+protocol OptionViewControllerDelegate: AnyObject {
+    func resumeGame()
+    func restartGame()
+    func quitGame()
+}
+
 class OptionViewController: UIViewController {
+    weak var delegate: OptionViewControllerDelegate?
 
     var buttonTapSound: AVAudioPlayer?
 
@@ -25,6 +32,7 @@ class OptionViewController: UIViewController {
                 } else {
                     print("Button tap sound file not found")
                 }
+    
 
         // Background Image (Same as the first screen)
         let backgroundImage = UIImageView(image: UIImage(named: "BlurBackground"))
@@ -56,6 +64,7 @@ class OptionViewController: UIViewController {
         let restartButton = createButton(title: "Restart")
         let quitButton = createButton(title: "Quit")
 
+        
         container.addSubview(resumeButton)
 
         // Divider 1
@@ -148,22 +157,23 @@ class OptionViewController: UIViewController {
         divider.translatesAutoresizingMaskIntoConstraints = false
         return divider
     }
-
+    
     @objc func resumeButtonTapped() {
         buttonTapSound?.play()
-        print("Resume button tapped")
-        // Add actions for the Resume button
+        delegate?.resumeGame()
+        dismiss(animated: true, completion: nil)
     }
 
     @objc func restartButtonTapped() {
         buttonTapSound?.play()
-        print("restart button tapped")
-        // Add actions for the Settings button
+        delegate?.restartGame()
+        dismiss(animated: true, completion: nil)
     }
 
     @objc func quitButtonTapped() {
         buttonTapSound?.play()
-        print("Quit button tapped")
-        // Add actions for the Quit button
+        delegate?.quitGame()
+        dismiss(animated: true, completion: nil)
     }
+
 }

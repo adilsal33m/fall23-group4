@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 //Main Page
 class FrontPageViewController: UIViewController {
@@ -106,6 +107,7 @@ class FrontPageViewController: UIViewController {
     let darkGreenColor = UIColor(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
 
     
+    //Functions
     func createButton(title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
@@ -154,18 +156,26 @@ class FrontPageViewController: UIViewController {
 
 
     @objc func TutorialButtonTapped() {
-        buttonTapSound?.play()
-        print("Settings button tapped")
-        
-        // Replace "YOUR_YOUTUBE_VIDEO_URL" with the actual URL of the YouTube video you want to open
-        if let videoURL = URL(string: "https://youtu.be/B_CN_5m7xqo?si=9b88-jJuzeuaZTdE") {
-            UIApplication.shared.open(videoURL)
-        }
+            buttonTapSound?.play()
+            print("Settings button tapped")
+            
+            if let videoPath = Bundle.main.path(forResource: "Tutorial", ofType: "mov") {
+                let videoURL = URL(fileURLWithPath: videoPath)
+                let player = AVPlayer(url: videoURL)
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = player
+                present(playerViewController, animated: true) {
+                    playerViewController.player?.play()
+                }
+            }
     }
     
     @objc func highScoresButtonTapped() {
         buttonTapSound?.play()
         print("High Scores button tapped")
+        let highscore = HighScoreController()
+        
+        navigationController?.pushViewController(highscore, animated: true)
     }
     
     

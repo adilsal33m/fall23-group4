@@ -65,8 +65,8 @@ class CHardInstructionsViewController: UIViewController {
         container.addSubview(titleLabel)
 
         // Buttons (Side by Side)
-        let button5 = createOutlineButton(title: "6 x 6")
-        let button6 = createOutlineButton(title: "8 x 8")
+        let button5 = createOutlineButton(title: "5 x 6")
+        let button6 = createOutlineButton(title: "7 x 8")
         container.addSubview(button5)
         container.addSubview(button6)
         button5.addTarget(self, action: #selector(button5Tapped), for: .touchUpInside)
